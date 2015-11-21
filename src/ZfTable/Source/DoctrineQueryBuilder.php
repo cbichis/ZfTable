@@ -64,7 +64,11 @@ class DoctrineQueryBuilder extends AbstractSource
         $tableAlias = ($header) ? $header->getTableAlias() : 'q';
 
         if (false === strpos($tableAlias, '.')) {
-            $tableAlias = $tableAlias.'.'.$column;
+            if(empty($tableAlias)){
+                $tableAlias = $column;
+            } else {
+                $tableAlias = $tableAlias.'.'.$column;
+            }
         }
 
         $this->query->orderBy($tableAlias, $order);
